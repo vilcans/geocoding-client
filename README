@@ -1,0 +1,7 @@
+This is a simple client for Google's Geocoding API.
+
+It submits a query (for example an address) to Google,
+receives the reply and generates a KML file.
+The KML file can be opened in Google Earth and shows
+the geocoded position of the address and its bounds (if available)
+and recommended viewport,
