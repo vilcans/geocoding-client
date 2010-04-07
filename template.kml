@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:py="http://genshi.edgewall.org/">
+  <Document>
+    <name py:content="query">KmlFile</name>
+    <Style id="style">
+      <LineStyle>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>888888ff</color>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="style-bounds">
+      <LineStyle>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>88ff8888</color>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="style-pushpin">
+      <IconStyle>
+        <scale>2</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+        </Icon>
+        <hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+      </IconStyle>
+    </Style>
+    <Folder py:for="p in json.results">
+      <name>${p.formatted_address} (${p.geometry.location_type})</name>
+      <Placemark>
+        <name>Viewport</name>
+        <styleUrl>#style</styleUrl>
+        <Polygon>
+          <tessellate>1</tessellate>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates py:with="view=p.geometry.viewport">
+                ${view.southwest.lng},${view.southwest.lat},0
+                ${view.southwest.lng},${view.northeast.lat},0
+                ${view.northeast.lng},${view.northeast.lat},0
+                ${view.northeast.lng},${view.southwest.lat},0
+                ${view.southwest.lng},${view.southwest.lat},0
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>Bounds</name>
+        <styleUrl>#style-bounds</styleUrl>
+        <Polygon>
+          <tessellate>1</tessellate>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates py:with="view=p.geometry.bounds">
+                ${view.southwest.lng},${view.southwest.lat},0
+                ${view.southwest.lng},${view.northeast.lat},0
+                ${view.northeast.lng},${view.northeast.lat},0
+                ${view.northeast.lng},${view.southwest.lat},0
+                ${view.southwest.lng},${view.southwest.lat},0
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>Location</name>
+        <styleUrl>#style-pushpin</styleUrl>
+        <Point>
+          <coordinates>${p.geometry.location.lng},${p.geometry.location.lat},0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
+
