@@ -4,8 +4,7 @@ import json
 import urllib
 
 from genshi.template import TemplateLoader
-template_loader = TemplateLoader([ '.' ], auto_reload=True)
-template = template_loader.load('template.kml')
+template = TemplateLoader(['.']).load('template.kml')
 
 query = u' '.join(a.decode() for a in sys.argv[1:])
 
