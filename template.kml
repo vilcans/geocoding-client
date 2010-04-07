@@ -4,7 +4,8 @@
     <name py:content="query">KmlFile</name>
     <Style id="style">
       <LineStyle>
-        <width>2</width>
+        <width>6</width>
+        <color>ff8888ff</color>
       </LineStyle>
       <PolyStyle>
         <color>888888ff</color>
@@ -13,7 +14,8 @@
     </Style>
     <Style id="style-bounds">
       <LineStyle>
-        <width>2</width>
+        <width>6</width>
+        <color>ffff8888</color>
       </LineStyle>
       <PolyStyle>
         <color>88ff8888</color>
