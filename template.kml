@@ -49,7 +49,7 @@
           </outerBoundaryIs>
         </Polygon>
       </Placemark>
-      <Placemark>
+      <Placemark py:if="'bounds' in p.geometry">
         <name>Bounds</name>
         <styleUrl>#style-bounds</styleUrl>
         <Polygon>
